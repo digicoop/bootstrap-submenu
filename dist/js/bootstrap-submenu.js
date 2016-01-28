@@ -79,7 +79,7 @@
 
       event.stopPropagation();
 
-      this.toggle();
+      this.toggle(event);
     },
     hide: function(event) {
       // Stop event bubbling
@@ -87,16 +87,19 @@
 
       this.close();
     },
-    open: function() {
+    open: function(event) {
+      this.$main.trigger('show.bs.submenu', {
+        originalEvent: event
+      });
       this.$main.addClass('open');
       this.$subs.trigger('hide.bs.submenu');
     },
-    toggle: function() {
+    toggle: function(event) {
       if (this.$main.hasClass('open')) {
         this.close();
       }
       else {
-        this.open();
+        this.open(event);
       }
     },
     keydown: function(event) {
@@ -108,7 +111,7 @@
       }
 
       if ($.inArray(event.keyCode, [13, 32]) != -1) {
-        this.toggle();
+        this.toggle(event);
       }
     }
   });
