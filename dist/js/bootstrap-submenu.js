@@ -92,6 +92,9 @@
         originalEvent: event
       });
       this.$main.addClass('open');
+      this.$main.trigger('shown.bs.submenu', {
+        originalEvent: event
+      });
       this.$subs.trigger('hide.bs.submenu');
     },
     toggle: function(event) {
